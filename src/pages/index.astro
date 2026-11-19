@@ -2,10 +2,11 @@
 import Base from '../layouts/Base.astro';
 import { loadSite } from '../lib/collections';
 import { SITE_NAME, SIZE_STEPS } from '../config';
+import { monthsWithData } from '../lib/search';
 
 const { events, areas } = await loadSite();
 // 「いつ」の月の選択肢＝データのある月
-const months = [...new Set(events.flatMap((e) => e.dates.flatMap((r) => [r.start.slice(0, 7), r.end.slice(0, 7)])))].sort();
+const months = monthsWithData(events);
 const monthLabel = (m: string) => `${m.slice(0, 4)}年${Number(m.slice(5, 7))}月`;
 const sizeLabel = (s: number) => `${s / 10000}万人〜`;
 ---

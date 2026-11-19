@@ -35,3 +35,10 @@ test('shiftLabel', () => {
   expect(shiftLabel({ offset: -3, range: d('2027-04-01', '2027-04-05'), added: [] })).toBe('3日前にずらすと（4/1〜4/5）');
   expect(shiftLabel({ offset: 2, range: d('2027-04-06', '2027-04-10'), added: [] })).toBe('2日後にずらすと（4/6〜4/10）');
 });
+
+test('a shift that adds the same events as a better one is skipped', () => {
+  const tenjin = big('2027-07-24', '2027-07-25', 1300000);
+  const s = suggestShifts(d('2027-07-20', '2027-07-22'), [tenjin, big('2027-07-17', '2027-07-17', 20000)]);
+  // +2 and +3 both add only tenjin → keep +2 only; the second slot goes to -3 (adds the small one)
+  expect(s.map((x) => x.offset)).toEqual([2, -3]);
+});

@@ -90,3 +90,8 @@ test('event ending on the start day counts', () => {
   if (r.mode !== 'overlap') throw new Error(r.mode);
   expect(names(r.hits)).toContain('京都の桜');
 });
+
+test('monthsWithData walks every month inside a long range', async () => {
+  const { monthsWithData } = await import('../src/lib/search');
+  expect(monthsWithData([ev({ dates: [d('2027-03-15', '2027-05-20')] })])).toEqual(['2027-03', '2027-04', '2027-05']);
+});

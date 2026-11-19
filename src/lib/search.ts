@@ -29,7 +29,8 @@ function hitsIn(events: ResolvedEvent[], period: DateRange): Hit[] {
   return events.map((e) => hitIn(e, period)).filter((h): h is Hit => h !== null);
 }
 
-function monthsOf(events: ResolvedEvent[]): string[] {
+// イベントがかかっているすべての月（長い会期の途中の月も含む）
+export function monthsWithData(events: ResolvedEvent[]): string[] {
   const set = new Set<string>();
   for (const e of events) {
     for (const r of e.dates) {
@@ -69,7 +70,7 @@ export function search(q: Query, events: ResolvedEvent[], areas: Area[], today: 
   if (q.when?.kind === 'range') {
     return { mode: 'overlap', area: area!, period: q.when.range, hits: hitsIn(near, q.when.range).sort(byStart) };
   }
-  const months = q.when?.kind === 'month' ? [q.when.month] : monthsOf(near);
+  const months = q.when?.kind === 'month' ? [q.when.month] : monthsWithData(near);
   return {
     mode: 'calendar',
     area: area!,

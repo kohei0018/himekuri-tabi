@@ -102,7 +102,7 @@ export function renderResult(r: SearchResult, x: Extras): string {
       return `<h2>行き先の候補</h2><div class="candidates">${items}</div>`;
     }
     case 'calendar':
-      return `<h2>${esc(r.area.name)}の周辺</h2>${r.months.length ? r.months.map((m) => calendarMonth(m.month, m.hits)).join('') : empty}`;
+      return `<h2>${esc(r.area.name)}の周辺</h2>${r.months.some((m) => m.hits.length) ? r.months.map((m) => calendarMonth(m.month, m.hits)).join('') : empty}`;
     case 'overlap': {
       const shifts = x.shifts.map((s) => shiftBox(s, x.query)).join('');
       const list = r.hits.length ? r.hits.map((h) => card(h, { from: r.area, crowded: x.crowded })).join('') : empty;

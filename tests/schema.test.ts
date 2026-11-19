@@ -70,3 +70,13 @@ test('area schema', () => {
   expect(areaSchema.safeParse({ id: 'kyoto', name: '京都市', prefecture: '京都府', lat: 35.0, lng: 135.7 }).success).toBe(true);
   expect(areaSchema.safeParse({ id: 'kyoto', name: '京都市' }).success).toBe(false);
 });
+
+test('impossible dates and mismatched years fail', () => {
+  const a = clone(aoi); a.occurrences = [{ year: 2027, status: 'estimated', dates: [{ start: '2027-04-31', end: '2027-04-31' }] }];
+  const b = clone(aoi); b.occurrences = [{ year: 2027, status: 'estimated', dates: [{ start: '2026-05-15', end: '2026-05-15' }] }];
+  const c = clone(aoi); c.kind = 'bloom'; delete c.attendance; delete c.rules; c.occurrences = [{ year: 2027, status: 'normal' }];
+  c.bloom = { station: '京都', flowering: '13-45', full_bloom: '04-04', forecast_url: 'https://tenki.jp/sakura/' };
+  expect(ok(a)).toBe(false);
+  expect(ok(b)).toBe(false);
+  expect(ok(c)).toBe(false);
+});

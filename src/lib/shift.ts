@@ -22,7 +22,17 @@ export function suggestShifts(period: DateRange, events: ResolvedEvent[]): Shift
   }
   // 生成順が |offset| の小さい順・前が先なので、安定ソートで同点の順が決まる
   shifts.sort((a, b) => b.score - a.score);
-  return shifts.slice(0, SHIFT_MAX_SUGGESTIONS).map(({ score: _score, ...s }) => s);
+  // 同じイベントしか増えないずらしは、よいほうだけ残す
+  const seen = new Set<string>();
+  const out: Shift[] = [];
+  for (const { score: _score, ...s } of shifts) {
+    const key = s.added.map((h) => h.event.id).sort().join(',');
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(s);
+    if (out.length === SHIFT_MAX_SUGGESTIONS) break;
+  }
+  return out;
 }
 
 const md = (d: string) => `${Number(d.slice(5, 7))}/${Number(d.slice(8, 10))}`;

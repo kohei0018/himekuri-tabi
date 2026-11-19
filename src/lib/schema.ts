@@ -1,7 +1,13 @@
 import { z } from 'astro/zod';
 
-const dateStr = z.string().regex(/^\d{4}-\d{2}-\d{2}$/);
-const mmdd = z.string().regex(/^\d{2}-\d{2}$/);
+// 実在する日付だけを通す（2027-04-31 や 13-45 のような入力ミスをビルドで止める）
+const realDate = (s: string) => {
+  const [y, m, d] = s.split('-').map(Number);
+  const t = new Date(Date.UTC(y, m - 1, d));
+  return t.getUTCFullYear() === y && t.getUTCMonth() === m - 1 && t.getUTCDate() === d;
+};
+const dateStr = z.string().regex(/^\d{4}-\d{2}-\d{2}$/).refine(realDate, { message: '存在しない日付' });
+const mmdd = z.string().regex(/^\d{2}-\d{2}$/).refine((s) => realDate(`2028-${s}`), { message: '存在しない月日' });
 const url = z.url();
 
 export const dateRangeSchema = z
@@ -36,6 +42,9 @@ export const occurrenceSchema = z
   .superRefine((o, ctx) => {
     if (o.status === 'confirmed' && (!o.dates || !o.source_url)) {
       ctx.addIssue({ code: 'custom', message: 'confirmed には dates と source_url が必須' });
+    }
+    if (o.dates?.some((r) => !r.start.startsWith(`${o.year}-`))) {
+      ctx.addIssue({ code: 'custom', message: 'dates の年が year と違う' });
     }
   });
 

@@ -7,6 +7,7 @@ import { suggestShifts } from '../lib/shift';
 import { crowdedDays } from '../lib/crowd';
 import { passesSize } from '../lib/score';
 import { renderResult, renderDay } from './render';
+import { formQuery, type FormFields } from './form';
 
 type Site = { year: number; areas: Area[]; events: ResolvedEvent[] };
 
@@ -17,19 +18,15 @@ function today(): DateStr {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
 
-function formParams(): URLSearchParams {
-  const when = $<HTMLSelectElement>('when').value;
-  const from = $<HTMLInputElement>('from').value;
-  const to = $<HTMLInputElement>('to').value;
-  const p = new URLSearchParams();
-  if (when === 'range') {
-    if (from && to) p.set('when', `${from}..${to}`);
-  } else if (when) p.set('when', when);
-  const where = $<HTMLSelectElement>('where').value;
-  if (where) p.set('where', where);
+function readForm(): FormFields {
   const pressed = document.querySelector<HTMLButtonElement>('.size[aria-pressed="true"]');
-  if (pressed) p.set('size', pressed.dataset.size!);
-  return p;
+  return {
+    when: $<HTMLSelectElement>('when').value,
+    from: $<HTMLInputElement>('from').value,
+    to: $<HTMLInputElement>('to').value,
+    where: $<HTMLSelectElement>('where').value,
+    size: pressed?.dataset.size ?? '',
+  };
 }
 
 function queryToForm(q: Query): void {
@@ -89,20 +86,24 @@ export async function start(): Promise<void> {
     draw(q);
   };
 
-  const fromForm = () => parseQuery(formParams(), ids);
+  // 入力途中（日付が揃っていない）なら何もしない。フォームを書き戻すと選択が「いつでも」に戻ってしまうため
+  const fromForm = (push: boolean) => {
+    const q = formQuery(readForm(), ids);
+    if (q) go(q, push);
+  };
 
   $<HTMLFormElement>('search').addEventListener('submit', (ev) => {
     ev.preventDefault();
-    go(fromForm(), true);
+    fromForm(true);
   });
   $<HTMLFormElement>('search').addEventListener('change', () => {
     $('range-fields').hidden = $<HTMLSelectElement>('when').value !== 'range';
-    go(fromForm(), false);
+    fromForm(false);
   });
   for (const b of document.querySelectorAll<HTMLButtonElement>('.size')) {
     b.addEventListener('click', () => {
       for (const o of document.querySelectorAll('.size')) o.setAttribute('aria-pressed', String(o === b));
-      go(fromForm(), false);
+      fromForm(false);
     });
   }
 

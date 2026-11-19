@@ -77,9 +77,15 @@ test('candidates list each area with count and top events', () => {
 });
 
 test('calendar marks national holidays', () => {
-  const r: SearchResult = { mode: 'calendar', area: kyoto, months: [{ month: '2027-03', hits: [] }] };
+  const e = big('桜', '2027-03-26');
+  const r: SearchResult = { mode: 'calendar', area: kyoto, months: [{ month: '2027-03', hits: [{ event: e, days: e.dates }] }] };
   const html = renderResult(r, none);
   const cell = html.slice(html.indexOf('data-day="2027-03-21"') - 60, html.indexOf('data-day="2027-03-22"'));
   expect(cell).toContain('is-holiday');
   expect(cell).toContain('春分の日');
+});
+
+test('calendar with no events in any month shows the empty message', () => {
+  const r: SearchResult = { mode: 'calendar', area: kyoto, months: [{ month: '2027-08', hits: [] }] };
+  expect(renderResult(r, none)).toContain('この時期のイベントはまだありません');
 });
