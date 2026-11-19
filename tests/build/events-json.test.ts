@@ -16,3 +16,8 @@ test('dates are resolved at build time', () => {
   expect(byId('kyoto-sakura').status).toBe('normal');
   expect(byId('kyoto-sakura').forecastUrl).toBe('https://tenki.jp/sakura/');
 });
+
+test('areas keep the order of data/areas.yaml', () => {
+  expect(json.areas.slice(0, 4).map((a: { id: string }) => a.id)).toEqual(['kyoto', 'arashiyama', 'osaka', 'usj']);
+  expect(json.areas[0]).not.toHaveProperty('order');
+});

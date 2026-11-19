@@ -8,7 +8,10 @@ export async function loadSite(): Promise<{ year: number; areas: Area[]; events:
   const [events, areas] = await Promise.all([getCollection('events'), getCollection('areas')]);
   return {
     year: TARGET_YEAR,
-    areas: areas.map((a) => a.data),
+    areas: areas
+      .map((a) => a.data)
+      .sort((a, b) => a.order - b.order)
+      .map(({ order: _order, ...a }) => a),
     events: toResolved(events.map((e) => e.data), TARGET_YEAR),
   };
 }

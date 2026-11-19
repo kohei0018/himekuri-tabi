@@ -1,3 +1,57 @@
 ---
+import Base from '../layouts/Base.astro';
+import { loadSite } from '../lib/collections';
+import { SITE_NAME, SIZE_STEPS } from '../config';
+
+const { events, areas } = await loadSite();
+// 「いつ」の月の選択肢＝データのある月
+const months = [...new Set(events.flatMap((e) => e.dates.flatMap((r) => [r.start.slice(0, 7), r.end.slice(0, 7)])))].sort();
+const monthLabel = (m: string) => `${m.slice(0, 4)}年${Number(m.slice(5, 7))}月`;
+const sizeLabel = (s: number) => `${s / 10000}万人〜`;
 ---
-<html lang="ja"><head><meta charset="utf-8" /><title>ひめくり旅</title></head><body><p>ひめくり旅</p></body></html>
+<Base title={SITE_NAME} description="「いつ」「どこ」を入れると、旅行の“おまけ”になる祭りやイベント、桜の見頃がわかります。" path="/">
+  <section class="hero">
+    <div class="wrap">
+      <h1>その旅行、<span class="hl">祭り</span>と<br />かぶってる？</h1>
+      <form id="search" class="search" autocomplete="off">
+        <div class="field">
+          <label for="when">いつ</label>
+          <select id="when" name="when">
+            <option value="">いつでも</option>
+            {months.map((m) => <option value={m}>{monthLabel(m)}</option>)}
+            <option value="range">日にちを指定する</option>
+          </select>
+        </div>
+        <div class="field-row" id="range-fields" hidden>
+          <div class="field">
+            <label for="from">出発日</label>
+            <input id="from" name="from" type="date" />
+          </div>
+          <div class="field">
+            <label for="to">帰着日</label>
+            <input id="to" name="to" type="date" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="where">どこ</label>
+          <select id="where" name="where">
+            <option value="">どこでも</option>
+            {areas.map((a) => <option value={a.id}>{a.name}（{a.prefecture}）</option>)}
+          </select>
+        </div>
+        <div class="sizes" role="group" aria-label="規模">
+          {SIZE_STEPS.map((s, i) => <button type="button" class="size" data-size={s} aria-pressed={i === 0 ? 'true' : 'false'}>{sizeLabel(s)}</button>)}
+        </div>
+        <button type="submit" class="btn btn-accent">探す</button>
+      </form>
+    </div>
+  </section>
+  <main class="wrap">
+    <div id="result" class="result" aria-live="polite"><p class="empty">読み込み中…</p></div>
+  </main>
+</Base>
+
+<script>
+  import { start } from '../client/app';
+  start();
+</script>
