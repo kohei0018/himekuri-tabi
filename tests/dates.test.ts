@@ -31,10 +31,10 @@ test('holidays', () => {
 });
 
 const base = {
-  id: 'x', name: 'x', kind: 'event', genre: ['祭り'], country: 'JP', region: 'domestic', prefecture: '京都府', city: '京都市',
+  id: 'x', name: 'x', kind: 'event' as const, genre: ['祭り'], country: 'JP', region: 'domestic' as const, prefecture: '京都府', city: '京都市',
   lat: 35, lng: 135, nearest: { city: '京都市' }, summary: 's', official_url: 'https://x.org',
   attendance: { value: 30000, basis: '主催者発表', source_url: 'https://x.org' },
-} as const;
+};
 
 test('resolveDates prefers occurrence dates', () => {
   const e = { ...base, rules: [{ type: 'fixed', month: 5, day: 15 }],
