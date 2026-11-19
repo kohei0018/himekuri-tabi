@@ -1,0 +1,19 @@
+# SAMPLE: 未照合。本番データのPRで置き換える
+id: kyoto-aoi-matsuri
+name: 葵祭
+kind: event
+genre: [伝統行事]
+country: JP
+region: domestic
+prefecture: 京都府
+city: 京都市
+lat: 35.0254
+lng: 135.7621
+nearest: { city: 京都市, airport: ITM }
+summary: 平安装束の行列が京都御所を出て、下鴨神社と上賀茂神社へ進む。京都三大祭のひとつ。
+official_url: https://ja.kyoto.travel/
+attendance: { value: 30000, basis: 推計, source_url: https://ja.kyoto.travel/ }
+rules:
+  - { type: fixed, month: 5, day: 15 }
+occurrences:
+  - { year: 2027, status: estimated, note: 雨天順延あり }

@@ -1,0 +1,21 @@
+# SAMPLE: 未照合。本番データのPRで置き換える
+id: sapporo-sakura
+name: 札幌の桜
+kind: bloom
+genre: [見頃]
+country: JP
+region: domestic
+prefecture: 北海道
+city: 札幌市
+lat: 43.0621
+lng: 141.3544
+nearest: { city: 札幌市, airport: CTS }
+summary: ゴールデンウィークのころ、円山公園や北海道神宮で桜が咲く。花見とジンギスカンが名物。
+official_url: https://www.sapporo.travel/
+bloom:
+  station: 札幌
+  flowering: 05-01
+  full_bloom: 05-05
+  forecast_url: https://tenki.jp/sakura/
+occurrences:
+  - { year: 2027, status: normal }

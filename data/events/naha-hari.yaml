@@ -1,0 +1,19 @@
+# SAMPLE: 未照合。本番データのPRで置き換える
+id: naha-hari
+name: 那覇ハーリー
+kind: event
+genre: [伝統行事, 祭り]
+country: JP
+region: domestic
+prefecture: 沖縄県
+city: 那覇市
+lat: 26.2063
+lng: 127.6656
+nearest: { city: 那覇市, airport: OKA }
+summary: 爬竜船（はりゅうせん）で競う海の行事。ゴールデンウィークの那覇港がにぎわう。
+official_url: https://www.naha-navi.or.jp/
+attendance: { value: 200000, basis: 推計, source_url: https://www.naha-navi.or.jp/ }
+rules:
+  - { type: fixed, month: 5, day: 3, length: 3 }
+occurrences:
+  - { year: 2027, status: estimated }

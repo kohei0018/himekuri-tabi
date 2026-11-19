@@ -1,0 +1,19 @@
+# SAMPLE: 未照合。本番データのPRで置き換える（期間外だが、ずらし・混雑・50kmの確認用）
+id: osaka-tenjin-matsuri
+name: 天神祭
+kind: event
+genre: [祭り, 花火]
+country: JP
+region: domestic
+prefecture: 大阪府
+city: 大阪市
+lat: 34.6957
+lng: 135.5126
+nearest: { city: 大阪市, airport: ITM }
+summary: 大阪天満宮の夏祭り。本宮の夜は船渡御と奉納花火で大川が埋まる。
+official_url: https://www.tenjinsan.com/
+attendance: { value: 1300000, basis: 報道, source_url: https://www.tenjinsan.com/ }
+rules:
+  - { type: fixed, month: 7, day: 24, length: 2 }
+occurrences:
+  - { year: 2027, status: estimated }

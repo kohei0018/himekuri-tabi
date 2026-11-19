@@ -1,0 +1,14 @@
+# 「どこ」の選択肢。中心から周辺50km以内をそのエリアとして扱う
+- { id: kyoto, name: 京都市, prefecture: 京都府, lat: 35.0116, lng: 135.7681 }
+- { id: arashiyama, name: 嵐山・嵯峨野, prefecture: 京都府, lat: 35.0094, lng: 135.6668 }
+- { id: osaka, name: 大阪市, prefecture: 大阪府, lat: 34.7025, lng: 135.4959 }
+- { id: usj, name: USJ・ベイエリア, prefecture: 大阪府, lat: 34.6654, lng: 135.4323 }
+- { id: naha, name: 那覇, prefecture: 沖縄県, lat: 26.2124, lng: 127.6809 }
+- { id: motobu, name: 本部・美ら海, prefecture: 沖縄県, lat: 26.6944, lng: 127.8779 }
+- { id: ishigaki, name: 石垣, prefecture: 沖縄県, lat: 24.3448, lng: 124.1572 }
+- { id: sapporo, name: 札幌, prefecture: 北海道, lat: 43.0621, lng: 141.3544 }
+- { id: otaru, name: 小樽, prefecture: 北海道, lat: 43.1907, lng: 140.9947 }
+- { id: hakodate, name: 函館, prefecture: 北海道, lat: 41.7687, lng: 140.7288 }
+- { id: asahikawa-furano, name: 旭川・富良野, prefecture: 北海道, lat: 43.6600, lng: 142.4300 }
+- { id: obihiro, name: 帯広, prefecture: 北海道, lat: 42.9237, lng: 143.1961 }
+- { id: niseko, name: ニセコ, prefecture: 北海道, lat: 42.8048, lng: 140.6874 }
