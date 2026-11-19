@@ -1,0 +1,76 @@
+---
+import Base from '../../layouts/Base.astro';
+import { loadSite } from '../../lib/collections';
+import { hotelLink, searchLinkFor, statusLabel } from '../../lib/links';
+import type { Area, ResolvedEvent } from '../../lib/types';
+
+export async function getStaticPaths() {
+  const { events, areas } = await loadSite();
+  return events.map((event) => ({ params: { id: event.id }, props: { event, areas } }));
+}
+
+interface Props {
+  event: ResolvedEvent;
+  areas: Area[];
+}
+const { event: e, areas } = Astro.props;
+const md = (d: string) => `${Number(d.slice(5, 7))}/${Number(d.slice(8, 10))}`;
+const range = (r: { start: string; end: string }) => (r.start === r.end ? md(r.start) : `${md(r.start)}〜${md(r.end)}`);
+const when = e.dates.map(range).join('・');
+const label = statusLabel(e.status);
+const description = `${when}（${label}）・${e.prefecture}${e.city}。${e.summary}`;
+---
+<Base title={e.name} description={description} path={`/events/${e.id}/`}>
+  <main class="wrap event">
+    <p class="event-genre">{e.genre.join('・')}</p>
+    <h1>{e.name}</h1>
+    <div class="event-when">
+      <span class="card-date">{e.dates[0].start.slice(0, 4)}年 {when}</span>
+      <span class={e.status === 'confirmed' ? 'badge badge-confirmed' : 'badge badge-estimated'}>{label}</span>
+    </div>
+    {e.status === 'estimated' && e.ruleText && <p class="note">例年のルール（{e.ruleText}）から推定した日程です。公式の発表で変わることがあります。</p>}
+    {e.status === 'normal' && <p class="note">気象庁の平年値から出した、例年の見頃の目安です。</p>}
+    <p class="meta">{e.prefecture} {e.city}</p>
+    <p>{e.summary}</p>
+
+    <dl class="facts">
+      {e.attendance && (
+        <>
+          <dt>動員数</dt>
+          <dd>約{e.attendance.value.toLocaleString("ja-JP")}人（推計値{e.attendance.basis === "推計" ? "" : `・${e.attendance.basis}`}） <a href={e.attendance.source_url} rel="nofollow noopener">出典</a></dd>
+        </>
+      )}
+      <dt>公式サイト</dt>
+      <dd><a href={e.official_url} rel="noopener">{e.official_url}</a></dd>
+      {e.sourceUrl && (
+        <>
+          <dt>日程の出典</dt>
+          <dd><a href={e.sourceUrl} rel="nofollow noopener">{e.sourceUrl}</a></dd>
+        </>
+      )}
+      {e.forecastUrl && (
+        <>
+          <dt>最新の開花予想</dt>
+          <dd><a href={e.forecastUrl} rel="nofollow noopener">開花予想を見る</a>（出典：気象庁の平年値）</dd>
+        </>
+      )}
+    </dl>
+
+    <div class="actions">
+      <a class="btn btn-primary" href={hotelLink(e)} rel="sponsored noopener">近くの宿を見る</a>
+      <a class="btn btn-outline" href={searchLinkFor(e, areas)}>このイベントがある時期で探す</a>
+    </div>
+  </main>
+</Base>
+
+<style>
+  .event { padding-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+  .event h1 { margin: 0; font-size: 28px; }
+  .event p { margin: 0; }
+  .event-genre { font-size: 13px; color: var(--sub); }
+  .event-when { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .facts { display: grid; grid-template-columns: max-content 1fr; gap: 6px 12px; margin: 8px 0; font-size: 14px; }
+  .facts dt { color: var(--label); font-weight: 700; }
+  .facts dd { margin: 0; overflow-wrap: anywhere; }
+  .actions { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+</style>
