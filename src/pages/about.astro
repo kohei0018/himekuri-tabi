@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="データについて" description="ひめくり旅のイベントの日程・動員数・桜の見頃のデータの出し方と出典について。" path="/about/">
+  <main class="wrap about">
+    <h1>データについて</h1>
+
+    <h2>日程の印</h2>
+    <dl>
+      <dt><span class="badge badge-confirmed">確定</span></dt>
+      <dd>主催者や公式サイトが発表した日程です。出典のリンクを載せています。</dd>
+      <dt><span class="badge badge-estimated">推定</span></dt>
+      <dd>「毎年5月15日」「7月の最終土曜」のような例年のルールから計算した日程です。公式の発表で変わることがあり、発表されしだい「確定」に切り替えます。</dd>
+      <dt><span class="badge badge-estimated">平年値</span></dt>
+      <dd>桜などの見頃です。気象庁の平年の開花日・満開日から出した例年の目安で、その年の天気で前後します。最新の開花予想へのリンクもあわせて載せています。</dd>
+    </dl>
+
+    <h2>動員数</h2>
+    <p>動員数は、主催者の発表や報道をもとにした<strong>推計値</strong>です。延べ人数か実人数かもイベントによって異なるため、規模の目安としてお使いください。</p>
+
+    <h2>出典</h2>
+    <p>桜の平年値：気象庁ホームページ（「さくらの開花日・満開日」の平年値）を加工して作成しています。気象庁のデータは政府標準利用規約に従って利用しています。</p>
+    <p>そのほかのイベントは、各イベントのページに公式サイトと出典を載せています。出かける前には、公式サイトで最新の情報をご確認ください。</p>
+
+    <h2>宿へのリンク</h2>
+    <p>「近くの宿を見る」のリンクには、アフィリエイト（広告）のリンクを含むことがあります。</p>
+
+    <h2>間違いを見つけたら</h2>
+    <p><a href="https://github.com/kohei0018/himekuri-tabi/issues" rel="noopener">GitHubのIssues</a>で教えてください。</p>
+  </main>
+</Base>
+
+<style>
+  .about { padding-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+  .about h1 { margin: 0; font-size: 26px; }
+  .about h2 { margin: 12px 0 0; font-size: 18px; }
+  .about p { margin: 0; }
+  .about dl { display: grid; grid-template-columns: max-content 1fr; gap: 8px 12px; margin: 0; }
+  .about dd { margin: 0; }
+</style>
