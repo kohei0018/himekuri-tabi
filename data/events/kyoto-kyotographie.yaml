@@ -1,4 +1,4 @@
-# SAMPLE: 未照合。本番データのPRで置き換える
+# verify-events 2026-11-19 済み
 id: kyoto-kyotographie
 name: KYOTOGRAPHIE 京都国際写真祭
 kind: exhibition
@@ -10,12 +10,13 @@ city: 京都市
 lat: 35.0116
 lng: 135.7681
 nearest: { city: 京都市, airport: ITM }
-summary: 町家や寺、ギャラリーなど市内の十数か所が会場になる写真の祭典。春の約1か月間だけ開かれる。
+summary: 町家や寺、ギャラリーなど市内の各所が会場になる写真の祭典。春の約1か月間だけ開かれる。
 official_url: https://www.kyotographie.jp/
 rules:
   - { type: manual }
 occurrences:
   - year: 2027
-    status: estimated
+    status: confirmed
     dates: [{ start: '2027-04-17', end: '2027-05-16' }]
-    note: 例年4月中旬〜5月中旬
+    source_url: https://www.kyotographie.jp/news/2026/18724/
+    note: テーマ・アーティスト・会場は後日発表

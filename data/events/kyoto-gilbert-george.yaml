@@ -1,0 +1,22 @@
+# verify-events 2026-11-19 済み
+id: kyoto-gilbert-george
+name: ギルバート＆ジョージ展（京都市京セラ美術館）
+kind: exhibition
+genre: [展示]
+country: JP
+region: domestic
+prefecture: 京都府
+city: 京都市
+lat: 35.0136
+lng: 135.7833
+nearest: { city: 京都市, airport: ITM }
+summary: 英国の2人組アーティスト、ギルバート＆ジョージの大規模個展。
+official_url: https://kyotocity-kyocera.museum/exhibition/20270526-20270829
+rules:
+  - { type: manual }
+occurrences:
+  - year: 2027
+    status: confirmed
+    dates: [{ start: '2027-05-26', end: '2027-08-29' }]
+    source_url: https://kyotocity-kyocera.museum/exhibition/20270526-20270829
+    note: 会場は新館 東山キューブ

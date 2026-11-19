@@ -1,0 +1,25 @@
+# verify-events 2026-11-19 済み
+id: kyoto-sewaritei-sakura-matsuri
+name: 京都やわた背割堤さくらまつり
+kind: event
+genre: [祭り, グルメ・物産]
+country: JP
+region: domestic
+prefecture: 京都府
+city: 八幡市
+lat: 34.8904
+lng: 135.7015
+nearest: { city: 京都市, airport: ITM }
+summary: 約1.4kmの堤に約220本のソメイヨシノが続く桜のトンネル。期間中は約40店のさくらマルシェやお花見船が出る。
+official_url: https://www.yodogawa-park.jp/sakurafes/
+attendance:
+  value: 150000
+  basis: 主催者発表
+  source_url: https://www.yodogawa-park.jp/cms/wp-content/uploads/2025/11/4d3ee6c0cf684b9da24b2c4af2100d19.pdf
+rules:
+  - { type: manual }
+occurrences:
+  - year: 2027
+    status: estimated
+    dates: [{ start: '2027-03-27', end: '2027-04-04' }]
+    note: 標本木の開花から1週間ほどの見頃に9日間程度。日程は開花に合わせて毎年3月に発表。運営協力金1人100円以上

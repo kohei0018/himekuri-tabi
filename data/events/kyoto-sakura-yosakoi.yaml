@@ -1,0 +1,26 @@
+# verify-events 2026-11-19 済み
+id: kyoto-sakura-yosakoi
+name: 京都さくらよさこい
+kind: event
+genre: [祭り]
+country: JP
+region: domestic
+prefecture: 京都府
+city: 京都市
+lat: 35.0140
+lng: 135.7832
+nearest: { city: 京都市, airport: ITM }
+summary: 学生が中心になって始めたよさこい祭り。岡崎公園、梅小路公園、二条城、京都駅前などで各地のチームが踊る。
+official_url: https://www.sakuyosa.com/
+attendance:
+  value: 50000
+  basis: 報道
+  source_url: https://rurubu.jp/andmore/spot/20004116
+rules:
+  - { type: nth_weekday, month: 4, weekday: 6, n: 1, length: 2 }
+occurrences:
+  - year: 2027
+    status: confirmed
+    dates: [{ start: '2027-04-03', end: '2027-04-04' }]
+    source_url: https://www.sakuyosa.com/archives/16857
+    note: 第23回。会場の内訳は未発表

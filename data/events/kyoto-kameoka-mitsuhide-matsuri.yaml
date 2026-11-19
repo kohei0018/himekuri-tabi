@@ -1,0 +1,24 @@
+# verify-events 2026-11-19 済み
+id: kyoto-kameoka-mitsuhide-matsuri
+name: 亀岡光秀まつり
+kind: event
+genre: [祭り, 伝統行事]
+country: JP
+region: domestic
+prefecture: 京都府
+city: 亀岡市
+lat: 35.0135
+lng: 135.5735
+nearest: { city: 京都市, airport: ITM }
+summary: 亀岡の城下町を築いた明智光秀をしのび、鎧武者の武者行列が旧城下町を練り歩く。グルメの「かめまるフェスタ」も同時開催。
+official_url: https://www.city.kameoka.kyoto.jp/site/kankou/3515.html
+attendance:
+  value: 20000
+  basis: 主催者発表
+  source_url: https://koubo.jp/press-release/prtimes/c52338_r171
+rules:
+  - { type: fixed, month: 5, day: 3 }
+occurrences:
+  - year: 2027
+    status: estimated
+    note: 2024・2026年とも5月3日。2027年の公式発表は未確認

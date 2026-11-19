@@ -1,0 +1,24 @@
+# verify-events 2026-11-19 済み
+id: kyoto-kyohaku-dai-kanoha
+name: 特別展「大狩野派」（京都国立博物館）
+kind: exhibition
+genre: [展示]
+country: JP
+region: domestic
+prefecture: 京都府
+city: 京都市
+lat: 34.9900
+lng: 135.7730
+nearest: { city: 京都市, airport: ITM }
+summary: 開館130周年記念で、狩野派400年の全体をたどる約半世紀ぶりの大回顧展。前半は室町〜桃山の作品。
+official_url: https://www.kyohaku.go.jp/jp/exhibitions/special/2027_kano/
+rules:
+  - { type: manual }
+occurrences:
+  - year: 2027
+    status: confirmed
+    dates:
+      - { start: '2027-04-20', end: '2027-05-30' }
+      - { start: '2027-06-08', end: '2027-07-19' }
+    source_url: https://www.kyohaku.go.jp/jp/exhibitions/
+    note: 第1部 室町〜桃山編、第2部 江戸〜明治編。5/31〜6/7は展示替えで休止

@@ -1,0 +1,24 @@
+# verify-events 2026-11-19 済み
+id: kyoto-mifune-matsuri
+name: 三船祭
+kind: event
+genre: [伝統行事]
+country: JP
+region: domestic
+prefecture: 京都府
+city: 京都市
+lat: 35.0128
+lng: 135.6777
+nearest: { city: 京都市, airport: ITM }
+summary: 車折神社の祭りで、嵐山・渡月橋の上流の大堰川に約20艘の船を浮かべ、優雅な船遊びを見せる。
+official_url: https://www.kurumazakijinja.or.jp/mifunemathuri2.html
+attendance:
+  value: 100000
+  basis: 報道
+  source_url: https://www.japan.travel/tw/spot/74/
+rules:
+  - { type: nth_weekday, month: 5, weekday: 0, n: 3 }
+occurrences:
+  - year: 2027
+    status: estimated
+    note: 雨天決行。2027年の公式発表は未確認

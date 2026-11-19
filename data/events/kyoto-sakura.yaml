@@ -1,4 +1,4 @@
-# SAMPLE: 未照合。本番データのPRで置き換える
+# verify-events 2026-11-19 済み
 id: kyoto-sakura
 name: 京都の桜
 kind: bloom
@@ -11,11 +11,11 @@ lat: 35.0116
 lng: 135.7681
 nearest: { city: 京都市, airport: ITM }
 summary: 円山公園、哲学の道、嵐山など、市内のあちこちでソメイヨシノが見頃になる。
-official_url: https://ja.kyoto.travel/
+official_url: https://www.data.jma.go.jp/sakura/data/sakura003_07.html
 bloom:
   station: 京都
-  flowering: 03-26
-  full_bloom: 04-04
+  flowering: '03-26'
+  full_bloom: '04-04'
   forecast_url: https://tenki.jp/sakura/
 occurrences:
   - { year: 2027, status: normal }

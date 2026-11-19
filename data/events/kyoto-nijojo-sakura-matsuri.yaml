@@ -1,0 +1,25 @@
+# verify-events 2026-11-19 済み
+id: kyoto-nijojo-sakura-matsuri
+name: 二条城桜まつり
+kind: event
+genre: [ライトアップ]
+country: JP
+region: domestic
+prefecture: 京都府
+city: 京都市
+lat: 35.0142
+lng: 135.7475
+nearest: { city: 京都市, airport: ITM }
+summary: 世界遺産・二条城の桜を、夜は18時からライトアップする。夜間は二の丸御殿も見られる。
+official_url: https://nijo-jocastle.city.kyoto.lg.jp/
+attendance:
+  value: 290000
+  basis: 報道
+  source_url: https://rurubu.jp/andmore/spot/20003750
+rules:
+  - { type: manual }
+occurrences:
+  - year: 2027
+    status: estimated
+    dates: [{ start: '2027-03-19', end: '2027-04-18' }]
+    note: 2025年は3/14〜4/13、2026年は3/19〜4/19。2027年の公式発表は未確認。入城は有料
