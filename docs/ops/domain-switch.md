@@ -13,7 +13,7 @@
 4. **pages.dev から転送する**：ダッシュボード → **Rules** → **Bulk Redirects** で、`himekuri-tabi.pages.dev` から `https://<名前>.com` へ **301**、「パスとクエリを保持」にチェックを入れる（無料プランで使える）
    - 確認：友だちに貼った古いリンク（`https://himekuri-tabi.pages.dev/?when=2027-04&where=kyoto` など）が、新しいドメインの同じ結果に飛ぶ
 5. **Search Console に登録する**：https://search.google.com/search-console で「ドメイン」プロパティとして `<名前>.com` を追加し、表示されたTXTレコードをCloudflareのDNSに追加して確認する。`https://<名前>.com/sitemap-index.xml` を送信する
-6. **Web Analytics**：`<名前>.com` を追加し、トークンが変わったら `PUBLIC_CF_BEACON_TOKEN` を更新する
+6. **Web Analytics**：Pagesの Metrics で有効にしてあれば、カスタムドメインでもそのまま計測される
 
 ## 戻すとき
 

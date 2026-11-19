@@ -25,10 +25,11 @@
 
 ## 3. アクセス解析（Web Analytics）
 
-1. ダッシュボードの **Analytics & Logs** → **Web Analytics** → **Add a site**
-2. `himekuri-tabi.pages.dev` を登録し、表示されたスクリプトの `token` の値を控える
-3. Pagesのプロジェクトの **Settings** → **Environment variables** に `PUBLIC_CF_BEACON_TOKEN` = 控えた値 を追加（Production）
-4. 再デプロイすると、全ページに解析のスクリプトが入る（Cookieは使わない）
+1. ダッシュボードの **Workers & Pages** → `himekuri-tabi` → **Metrics** タブ
+2. Web Analytics の **Enable** を押す
+3. 次のデプロイから、Cloudflareが解析のスクリプトを自動で全ページに入れる（Cookieは使わない）。トークンや環境変数の設定は要らない
+
+（`PUBLIC_CF_BEACON_TOKEN` は、Pages以外で配信するとき用。Pagesでは設定しない。両方入れると二重に数えられる）
 
 ## 4. 確認
 
