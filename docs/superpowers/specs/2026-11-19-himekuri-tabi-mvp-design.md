@@ -7,7 +7,7 @@
 旅行の「おまけ」になるイベントを見つけるためのスマホ向けWebサービス。
 
 - サービス名（仮）：**ひめくり旅**。タイトル、ヘッダー、OGPに使う。表示名は後から変えてよい
-- 公開URL：`himekuri-tabi.pages.dev`（Cloudflareのプロジェクト名＝リポジトリ名）。共有リンクやSearch Consoleの登録に残るので、表示名が変わってもこちらは変えない
+- 公開URL：`himekuri-tabi.idotworks-lab.workers.dev`（Cloudflare Workers の名前＝リポジトリ名。アカウントのサブドメインは idotworks-lab）。共有リンクやSearch Consoleの登録に残るので、表示名が変わってもこちらは変えない
 
 - 作る人（オーナー）は、旅先を選ぶときに「どうせ行くなら、イベントにも参加できたら楽しい」と思っている。イベントは旅行の目的ではなく、旅行をちょっと良くするもの。だから大きな祭りだけでなく、中規模のイベントにも価値がある
 - よくある場面：友だちと旅行する。決まっているのは1つだけ（「3月〜5月のどこか」のような時期か、「牧場に行く」のような場所）で、ほかは何も決まっていない。候補はLINEのグループで出し合い、Discordで話して決める
@@ -36,12 +36,12 @@
 
 ## 2. 制約
 
-- **お金**：運用費は年5,000円程度まで。MVPの間は、実質0円（Cloudflareの無料枠＋`pages.dev`）
+- **お金**：運用費は年5,000円程度まで。MVPの間は、実質0円（Cloudflareの無料枠＋`workers.dev`）
   - 独自ドメイン（.com、Cloudflare Registrarで年1,600円前後）は、名前が固まったら取る。**いつでも.comに切り替えられるように作っておく**（7章）
   - Cloudflareの有料プラン（Workers Paid、月5ドル）は予算を超えるので使わない
 - **LLM**：使ってよい。この開発PCのローカルLLMか、月500円程度で済むクラウドのAPI。MVPのデータは、Claude Codeで下書きを作る。APIは、データ集めを自動化するときに使う
   - 月500円（年6,000円）を毎月使うと、ドメイン代と合わせて年5,000円を超える。APIを使い始めるときに、予算の枠を見直す
-- **インフラ**：Cloudflare（Pages／Workersの静的配信）。GitHubの `kohei0018/himekuri-tabi` とつなぎ、mainへのプッシュで自動公開。アカウント作成と連携はオーナーが行う
+- **インフラ**：Cloudflare Workers（静的アセット）。GitHubの `kohei0018/himekuri-tabi` とつなぎ、mainへのプッシュで自動公開。アカウント作成と連携はオーナーが行う
 - **リポジトリ**：ローカルの `himekuri` フォルダがそのまま `kohei0018/himekuri-tabi`（`origin` 登録済み、SSHのエイリアス `github-claude-dev`、まだコミットなし）。メモは `docs/himekuri-tabi_draft.md`、デザイン案の保存版HTMLは `docs/design/` に置く【設計者の判断】
 - **サーバー側の処理は持たない**。検索はブラウザの中で行う
 - **データ収集**：Claude Codeで下書き（YAML）を作り、オーナーがPRの差分で確認する
@@ -288,13 +288,13 @@ tests/                    Vitest
 
 ## 7. 公開と運用
 
-- Cloudflare：GitHubのリポジトリとつなぎ、mainへのプッシュで本番、PRごとにプレビューURL。MVPは `himekuri-tabi.pages.dev`
+- Cloudflare：GitHubのリポジトリとつなぎ、mainへのプッシュで本番、PRごとにプレビューURL。MVPは `himekuri-tabi.idotworks-lab.workers.dev`
 - **.comへの切り替えの準備**（MVPから入れておく）：
   - サイトのURLは設定の1か所（Astroの `site`。環境変数で上書きできる）にだけ書く。canonical、OGPの `og:url`・`og:image`、`sitemap.xml`、`robots.txt` は、すべてそこから組み立てる。コードやデータにホスト名を直接書かない
   - ページ内のリンクは相対パスにする
-  - 切り替えの手順を `docs/` に書いておく：ドメインを取る → Cloudflareでカスタムドメインを設定する → `site` を変える → `pages.dev` から新しいドメインへ301で転送する（Cloudflareの無料のリダイレクト機能） → Search Consoleに登録する
-- アクセス解析：Cloudflare Web Analytics（Cookieなし、無料）
-- Search Console：**.comに切り替えてから登録する**。`pages.dev` の間は登録しない（移転の手間を避けるため）。`sitemap.xml` は最初から生成しておく
+  - 切り替えの手順を `docs/` に書いておく：ドメインを取る → Cloudflareでカスタムドメインを設定する → `site` を変える → `workers.dev` から新しいドメインへ301で転送する → Search Consoleに登録する
+- アクセス解析：Cloudflare Web Analytics（Cookieなし、無料）。Workersでは自動で入らないので、解析のトークン（公開してよい値）を `src/config.ts` の `CF_BEACON_TOKEN` に書く
+- Search Console：**.comに切り替えてから登録する**。`workers.dev` の間は登録しない（移転の手間を避けるため）。`sitemap.xml` は最初から生成しておく
 - 宿のリンク：楽天トラベルのアフィリエイト（無料）。エリアと日付を載せた検索のリンクにする。アカウントができるまでは、アフィリエイトのIDなしの普通のリンクにしておき、IDを設定1か所で差し込めるようにする
 - CI：PRごとに型チェック、テスト、ビルド（スキーマ検査を含む）を通す（GitHub Actionsの無料枠）
 

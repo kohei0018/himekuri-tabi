@@ -2,7 +2,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const dist = (...p: string[]) => join(__dirname, '..', '..', 'dist', ...p);
-const site = process.env.SITE_URL ?? 'https://himekuri-tabi.pages.dev';
+const site = process.env.SITE_URL ?? 'https://himekuri-tabi.idotworks-lab.workers.dev';
 
 test('robots.txt points to the sitemap on the configured site', () =>
   expect(readFileSync(dist('robots.txt'), 'utf8')).toContain(`Sitemap: ${site}/sitemap-index.xml`));

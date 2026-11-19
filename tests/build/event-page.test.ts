@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const page = (id: string) => readFileSync(join(__dirname, '..', '..', 'dist', 'events', id, 'index.html'), 'utf8');
-const site = process.env.SITE_URL ?? 'https://himekuri-tabi.pages.dev';
+const site = process.env.SITE_URL ?? 'https://himekuri-tabi.idotworks-lab.workers.dev';
 
 test('event page has title and absolute OGP from the site setting', () => {
   const html = page('kyoto-aoi-matsuri');
@@ -22,6 +22,6 @@ test('estimated event shows the rule; bloom shows source and forecast link', () 
 
 test('no hard-coded host other than the site setting', () => {
   const html = page('naha-hari');
-  const hosts = [...html.matchAll(/https:\/\/himekuri-tabi\.pages\.dev/g)];
-  if (site !== 'https://himekuri-tabi.pages.dev') expect(hosts).toHaveLength(0);
+  const hosts = [...html.matchAll(/https:\/\/himekuri-tabi\.idotworks-lab\.workers\.dev/g)];
+  if (site !== 'https://himekuri-tabi.idotworks-lab.workers.dev') expect(hosts).toHaveLength(0);
 });

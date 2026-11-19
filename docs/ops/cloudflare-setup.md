@@ -1,6 +1,6 @@
 # Cloudflareで公開する手順（オーナーが1回だけ行う）
 
-所要時間：15分ほど。費用：0円。
+所要時間：15分ほど。費用：0円。公開は **Cloudflare Workers（静的アセット）** で行う。ビルドと公開の設定はリポジトリの `wrangler.jsonc` に書いてあるので、ダッシュボードで細かい設定をする必要はない。
 
 ## 1. アカウントを作る
 
@@ -8,32 +8,26 @@
 
 ## 2. GitHubのリポジトリをつなぐ
 
-1. ダッシュボードの **Workers & Pages** → **Create** → **Pages** → **Connect to Git**
+1. ダッシュボードの **Workers & Pages** → **Create** → **Import a repository**
 2. GitHubを連携し、`kohei0018/himekuri-tabi` だけにアクセスを許可する
-3. 設定を次のとおりにする
-
-| 項目 | 値 |
-| --- | --- |
-| Project name | `himekuri-tabi`（公開URLが `himekuri-tabi.pages.dev` になる。後から変えない） |
-| Production branch | `main` |
-| Framework preset | Astro |
-| Build command | `npm run build` |
-| Build output directory | `dist` |
-| 環境変数 | `NODE_VERSION` = `24` |
-
-4. **Save and Deploy**。以後、mainへのプッシュで本番に、PRごとにプレビューURLに自動で公開される
+3. 名前は `himekuri-tabi`（`wrangler.jsonc` の `name` と同じにする）。ビルドの設定は既定のままでよい
+   - ビルドは `wrangler.jsonc` の `build.command`（`npm run build`）で行われ、`dist/` が公開される
+   - 「Build output directory」の欄はない（Pagesとの違い）
+4. 公開URLは `https://himekuri-tabi.idotworks-lab.workers.dev/`。以後、mainへのプッシュで本番に、PRごとにプレビューに自動で公開される
+   - PRのプレビューには `wrangler.jsonc` の `"previews": {}` が必要（入れてある）
 
 ## 3. アクセス解析（Web Analytics）
 
-1. ダッシュボードの **Workers & Pages** → `himekuri-tabi` → **Metrics** タブ
-2. Web Analytics の **Enable** を押す
-3. 次のデプロイから、Cloudflareが解析のスクリプトを自動で全ページに入れる（Cookieは使わない）。トークンや環境変数の設定は要らない
+Workersでは、Pagesのような自動の埋め込みは使えないので、トークンをコードに書く。
 
-（`PUBLIC_CF_BEACON_TOKEN` は、Pages以外で配信するとき用。Pagesでは設定しない。両方入れると二重に数えられる）
+1. ダッシュボードの **Web Analytics** → **Add a site**
+2. ホスト名に `himekuri-tabi.idotworks-lab.workers.dev` を入れて **Done**
+3. **Manage site** に出るスクリプトの中の `"token": "…"` の値をClaudeに伝える（ページに埋め込まれる公開の値なので、伝えて問題ない）
+4. Claudeが `src/config.ts` の `CF_BEACON_TOKEN` に入れてPRを作る。マージすると全ページに解析のスクリプトが入る（Cookieは使わない）
 
 ## 4. 確認
 
-- `https://himekuri-tabi.pages.dev/` が開く
-- `https://himekuri-tabi.pages.dev/events/kyoto-aoi-matsuri/` をLINEに貼ると、カード（タイトルと画像）が出る
+- `https://himekuri-tabi.idotworks-lab.workers.dev/` が開く
+- `https://himekuri-tabi.idotworks-lab.workers.dev/events/kyoto-aoi-matsuri/` をLINEに貼ると、カード（タイトルと画像）が出る
 
 Search Consoleへの登録は、.comに切り替えてから行う（`domain-switch.md`）。
