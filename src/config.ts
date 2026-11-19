@@ -8,3 +8,5 @@ export const CROWD_THRESHOLD = 1000000;
 export const TARGET_YEAR = 2027;
 export const RAKUTEN_AFFILIATE_ID = '';
 export const SITE_NAME = 'ひめくり旅';
+// Cloudflare Web Analytics のトークン（ページに埋め込まれる公開の値）。空なら解析のスクリプトを入れない
+export const CF_BEACON_TOKEN = '';
