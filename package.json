@@ -8,8 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "test": "vitest run --dir tests --exclude \"tests/build/**\"",
-    "test:build": "vitest run tests/build"
+    "test": "vitest run",
+    "test:build": "vitest run --config vitest.build.config.ts"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.6",

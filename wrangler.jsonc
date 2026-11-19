@@ -1,0 +1,14 @@
+// Cloudflare Workers（静的アセット）で dist/ を配信する設定
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "himekuri-tabi",
+  "compatibility_date": "2026-11-01",
+  // wrangler deploy の前に Astro でビルドする（ダッシュボードのビルド設定は不要）
+  "build": { "command": "npm run build" },
+  // PR ごとのプレビュー（npx wrangler preview）に必要。中身は空でよい
+  "previews": {},
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}
