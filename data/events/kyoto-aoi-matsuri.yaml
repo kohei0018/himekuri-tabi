@@ -1,4 +1,4 @@
-# SAMPLE: 未照合。本番データのPRで置き換える
+# verify-events 2026-11-19 済み
 id: kyoto-aoi-matsuri
 name: 葵祭
 kind: event
@@ -7,13 +7,18 @@ country: JP
 region: domestic
 prefecture: 京都府
 city: 京都市
-lat: 35.0254
-lng: 135.7621
+lat: 35.0253
+lng: 135.7622
 nearest: { city: 京都市, airport: ITM }
-summary: 平安装束の行列が京都御所を出て、下鴨神社と上賀茂神社へ進む。京都三大祭のひとつ。
-official_url: https://ja.kyoto.travel/
-attendance: { value: 30000, basis: 推計, source_url: https://ja.kyoto.travel/ }
+summary: 平安装束の約500人の行列が京都御所を出て、下鴨神社を経て上賀茂神社まで約8kmを進む。京都三大祭のひとつ。
+official_url: https://ja.kyoto.travel/event/major/aoi/
+attendance:
+  value: 35000
+  basis: 警察発表
+  source_url: https://www.nikkei.com/article/DGXZQOUF151E30V10C24A5000000/
 rules:
   - { type: fixed, month: 5, day: 15 }
 occurrences:
-  - { year: 2027, status: estimated, note: 雨天順延あり }
+  - year: 2027
+    status: estimated
+    note: 雨天順延（前日18時ごろ判断）。2027年の公式発表は未確認
